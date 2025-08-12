@@ -6,10 +6,30 @@ export const metadata: Metadata = {
   description: "Pencarian dan daftar berita Oil & Gas yang modern",
 };
 
+function ThemeInitScript() {
+  // Script kecil yang dieksekusi di client sebelum paint
+  const code = `
+(function() {
+  try {
+    var stored = localStorage.getItem('theme');
+    var wantDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var root = document.documentElement;
+    if (wantDark) root.classList.add('dark'); else root.classList.remove('dark');
+  } catch (e) {}
+})();
+`;
+  return <script dangerouslySetInnerHTML={{ __html: code }} />;
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id" className="scroll-smooth">
-      <body className="antialiased">{children}</body>
+    <html lang="id" suppressHydrationWarning>
+      <head>
+        <ThemeInitScript />
+      </head>
+      <body className="antialiased bg-neutral-50 dark:bg-neutral-950">
+        {children}
+      </body>
     </html>
   );
 }
