@@ -1,15 +1,15 @@
-import './globals.css';
-import type { Metadata } from 'next';
+import "./globals.css";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'ArkWork',
-  description: 'Starter Frontend',
+  title: "O&G Monitor",
+  description: "Pencarian dan daftar berita Oil & Gas yang modern",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-slate-50 text-slate-900">{children}</body>
+    <html lang="id" className="scroll-smooth">
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
