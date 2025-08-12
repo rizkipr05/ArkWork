@@ -19,10 +19,12 @@ app.get("/", (_req, res) => {
 import authRoutes from "./routes/auth";
 import dashboardRoutes from "./routes/dashboard";
 import tendersRoutes from "./routes/tenders";
+import newsRoutes from "./routes/news";
 
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/tenders", tendersRoutes);
+app.use("/api/news", newsRoutes);
 
 // Health (opsional, enak buat cek cepat)
 app.get("/api/health", (_req, res) => {
