@@ -3,13 +3,12 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "O&G Monitor",
-  description: "Pencarian dan daftar berita Oil & Gas yang modern",
+  description: "Berita Oil & Gas Indonesia",
 };
 
 function ThemeInitScript() {
-  // Script kecil yang dieksekusi di client sebelum paint
   const code = `
-(function() {
+(function () {
   try {
     var stored = localStorage.getItem('theme');
     var wantDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -24,12 +23,8 @@ function ThemeInitScript() {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <head>
-        <ThemeInitScript />
-      </head>
-      <body className="antialiased bg-neutral-50 dark:bg-neutral-950">
-        {children}
-      </body>
+      <head><ThemeInitScript /></head>
+      <body className="antialiased bg-neutral-50 dark:bg-neutral-950">{children}</body>
     </html>
   );
 }

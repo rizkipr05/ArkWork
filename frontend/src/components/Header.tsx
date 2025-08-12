@@ -27,17 +27,17 @@ export default function Header() {
           aria-label="Toggle theme"
           className="inline-flex h-9 items-center gap-2 rounded-xl px-3 border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+          <svg viewBox="0 0 24 24" className={`h-5 w-5 ${dark ? "text-yellow-400" : "text-amber-500"}`}>
             {dark ? (
-              // Icon matahari
-              <path d="M6.76 4.84 5.34 3.42 3.92 4.84l1.42 1.42 1.42-1.42zm10.48 0 1.42 1.42 1.42-1.42-1.42-1.42-1.42 1.42zM12 4V1h0v3zm0 19v-3h0v3zm8-8h3v0h-3zm-19 0h3v0H1zm14.24 6.76 1.42 1.42 1.42-1.42-1.42-1.42-1.42 1.42zM4.84 17.24 3.42 18.66 4.84 20.08l1.42-1.42-1.42-1.42zM12 7a5 5 0 100 10 5 5 0 000-10z" />
+              // Mode GELAP aktif → ikon BULAN
+              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="currentColor" />
             ) : (
-              // Icon bulan
-              <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
+              // Mode TERANG aktif → ikon MATAHARI
+              <path d="M6.76 4.84 5.34 3.42 3.92 4.84l1.42 1.42 1.42-1.42zm10.48 0 1.42 1.42 1.42-1.42-1.42-1.42-1.42 1.42zM12 4V1h0v3zm0 19v-3h0v3zm8-8h3v0h-3zm-19 0h3v0H1zm14.24 6.76 1.42 1.42 1.42-1.42-1.42-1.42-1.42 1.42zM4.84 17.24 3.42 18.66 4.84 20.08l1.42-1.42-1.42-1.42zM12 7a5 5 0 100 10 5 5 0 000-10z" fill="currentColor" />
             )}
           </svg>
           <span className="text-sm text-neutral-700 dark:text-neutral-200 hidden sm:inline">
-            {dark ? "Terang" : "Gelap"}
+            {dark ? "Gelap" : "Terang"}
           </span>
         </button>
       </div>

@@ -5,24 +5,23 @@ import { useEffect, useState } from "react";
 export default function useDarkMode() {
   const [dark, setDark] = useState(false);
 
-  // Ambil preferensi dari localStorage atau system preference
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
+    const stored = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
     if (stored) {
       setDark(stored === "dark");
-    } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setDark(prefersDark);
+    } else if (typeof window !== "undefined") {
+      setDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
     }
   }, []);
 
-  // Update class <html> & simpan preferensi
   useEffect(() => {
+    if (typeof document === "undefined") return;
+    const root = document.documentElement;
     if (dark) {
-      document.documentElement.classList.add("dark");
+      root.classList.add("dark");
       localStorage.setItem("theme", "dark");
     } else {
-      document.documentElement.classList.remove("dark");
+      root.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
   }, [dark]);

@@ -2,30 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Menghilangkan scrollbar dengan cara yang lebih kompatibel */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE 10+ */
-  scrollbar-width: none; /* Firefox */
-}
+* { transition: background-color 150ms, color 150ms; }
 
-/* Menambahkan fallback untuk color-scheme */
-:root {
-  color-scheme: light dark;
-}
-
-/* Memastikan penggunaan warna tema Tailwind */
-html, body {
-  background-color: theme('colors.neutral.50');
-}
-:root.dark html, :root.dark body {
-  background-color: theme('colors.neutral.950');
-}
-
-/* Menambahkan properti untuk memastikan gambar transparan */
-img {
-  color: transparent;
-  background-color: transparent; /* Tambahan untuk memastikan transparansi */
-}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

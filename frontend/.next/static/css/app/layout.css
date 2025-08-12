@@ -601,9 +601,6 @@ video {
 .h-9 {
   height: 2.25rem;
 }
-.h-full {
-  height: 100%;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -769,9 +766,6 @@ video {
 .to-rose-500 {
   --tw-gradient-to: #f43f5e var(--tw-gradient-to-position);
 }
-.fill-current {
-  fill: currentColor;
-}
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -862,6 +856,10 @@ video {
 .tracking-tight {
   letter-spacing: -0.025em;
 }
+.text-amber-500 {
+  --tw-text-opacity: 1;
+  color: rgb(245 158 11 / var(--tw-text-opacity));
+}
 .text-amber-600 {
   --tw-text-opacity: 1;
   color: rgb(217 119 6 / var(--tw-text-opacity));
@@ -882,9 +880,17 @@ video {
   --tw-text-opacity: 1;
   color: rgb(23 23 23 / var(--tw-text-opacity));
 }
+.text-rose-600 {
+  --tw-text-opacity: 1;
+  color: rgb(225 29 72 / var(--tw-text-opacity));
+}
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-yellow-400 {
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity));
 }
 .antialiased {
   -webkit-font-smoothing: antialiased;
@@ -925,33 +931,10 @@ video {
   transition-duration: 300ms;
 }
 
-/* Menghilangkan scrollbar dengan cara yang lebih kompatibel */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE 10+ */
-  scrollbar-width: none; /* Firefox */
-}
+* { transition: background-color 150ms, color 150ms; }
 
-/* Menambahkan fallback untuk color-scheme */
-:root {
-  color-scheme: light dark;
-}
-
-/* Memastikan penggunaan warna tema Tailwind */
-html, body {
-  background-color: #fafafa;
-}
-:root.dark html, :root.dark body {
-  background-color: #0a0a0a;
-}
-
-/* Menambahkan properti untuk memastikan gambar transparan */
-img {
-  color: transparent;
-  background-color: transparent; /* Tambahan untuk memastikan transparansi */
-}
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .hover\:bg-neutral-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
@@ -1075,12 +1058,12 @@ img {
     grid-column: span 12 / span 12;
   }
 
-  .md\:col-span-3 {
-    grid-column: span 3 / span 3;
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
   }
 
-  .md\:col-span-6 {
-    grid-column: span 6 / span 6;
+  .md\:col-span-8 {
+    grid-column: span 8 / span 8;
   }
 
   .md\:flex {
@@ -1111,3 +1094,4 @@ img {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
