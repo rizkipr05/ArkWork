@@ -1,4 +1,4 @@
-// File: D:\tugas\magang\ArkWork\frontend\src\app\tender\page.tsx
+// File: D:\ArkWork\frontend\src\app\tender\page.tsx
 import * as entry from '../../../../src/app/tender/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

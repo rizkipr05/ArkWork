@@ -1,8 +1,11 @@
+// src/app/layout.tsx
 import './globals.css'
 import { Inter } from 'next/font/google'
 import Nav from '@/components/nav'
 import { AuthProvider } from '@/hooks/useAuth'
 import type { Metadata } from 'next'
+import ClientShell from './ClientShell'   // jika sudah ada (untuk chatbot)
+import Footer from '@/components/Footer'   // <--- tambahkan
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -13,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -29,7 +32,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="bg-gray-50">
         <AuthProvider>
           <Nav />
-          <main className="pt-16">{children}</main>
+          {/* Jika pakai ClientShell untuk chatbot, bungkus main+footer di dalamnya */}
+          <ClientShell>
+            <main className="pt-16">{children}</main>
+            <Footer /> {/* <-- tampil di semua halaman */}
+          </ClientShell>
         </AuthProvider>
       </body>
     </html>
