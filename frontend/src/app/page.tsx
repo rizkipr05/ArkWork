@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import Header from "../components/Header";
+import ChatbotWidget from "../components/ChatbotWidget";
 import Image from "next/image";
 
 type FetchedItem = {
@@ -196,6 +197,7 @@ export default function Page() {
           © {new Date().getFullYear()} O&G Monitor • Next.js + Tailwind
         </div>
       </footer>
+      <ChatbotWidget /> 
     </div>
   );
 }
