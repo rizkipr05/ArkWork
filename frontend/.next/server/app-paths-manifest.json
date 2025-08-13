@@ -3,5 +3,6 @@
   "/tender/page": "app/tender/page.js",
   "/jobs/page": "app/jobs/page.js",
   "/news/page": "app/news/page.js",
-  "/about/page": "app/about/page.js"
+  "/about/page": "app/about/page.js",
+  "/auth/signin/page": "app/auth/signin/page.js"
 }

@@ -1,0 +1,16 @@
+{
+  "devDependencies": {
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "next": "^15.4.6",
+    "p-limit": "^6.2.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "rss-parser": "^3.13.0"
+  }
+}
