@@ -1,4 +1,4 @@
-// File: D:\ArkWork\frontend\src\app\auth\signin\page.tsx
+// File: D:\tugas\magang\project\ArkWork\frontend\src\app\auth\signin\page.tsx
 import * as entry from '../../../../../src/app/auth/signin/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

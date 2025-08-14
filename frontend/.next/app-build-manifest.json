@@ -11,40 +11,20 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/tender/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/tender/page.js"
-    ],
-    "/jobs/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/jobs/page.js"
-    ],
-    "/auth/signin/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/auth/signin/page.js"
-    ],
     "/auth/signup/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/auth/signup/page.js"
     ],
-    "/news/page": [
+    "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/news/page.js"
+      "static/chunks/app/dashboard/page.js"
     ],
-    "/about/page": [
+    "/auth/signin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/about/page.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/auth/signin/page.js"
     ]
   }
 }
