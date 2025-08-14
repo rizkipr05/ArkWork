@@ -74,7 +74,9 @@ export default function SignUp() {
             <Image
               src={Logo}
               alt="ArkWork Logo"  
-              className="mx-auto mb-3 h-16 w-auto"
+              width={48}
+              height={48}
+              className="mx-auto mb-3 h-20 w-20 object-contain"
               priority
             />
             <h1 className="text-xl font-semibold tracking-tight text-slate-900">

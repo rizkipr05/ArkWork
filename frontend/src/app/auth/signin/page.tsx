@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+
+// ✅ Import logo sebagai modul statis dari src/app/Images
+// Pastikan nama file & path persis (case-sensitive)
+import ArkLogo from '@/app/Images/Ungu__1_-removebg-preview.png';
 
 export default function SignIn() {
   const router = useRouter();
@@ -53,8 +58,16 @@ export default function SignIn() {
     <div className="min-h-[100svh] bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center px-4 py-10">
       <div className="mx-auto w-full max-w-[420px]">
         <div className="relative overflow-hidden rounded-3xl border border-slate-200/70 bg-white shadow-xl">
+          {/* Header + Logo */}
           <div className="px-6 pt-6 text-center">
-            <div className="mx-auto mb-3 h-12 w-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-blue-500 to-amber-400 shadow" />
+            <Image
+              src={ArkLogo}
+              alt="ArkWork Logo"
+              width={48}
+              height={48}
+              className="mx-auto mb-3 h-20 w-20 object-contain"
+              priority
+            />
             <h1 className="text-xl font-semibold tracking-tight text-slate-900">
               Sign in to ArkWork
             </h1>
@@ -69,8 +82,12 @@ export default function SignIn() {
               <div>
                 <div className="font-medium text-blue-900">Demo Account</div>
                 <div className="mt-1 space-y-0.5 text-blue-800/90">
-                  <div><span className="opacity-70">Email:</span> demo@arkwork.com</div>
-                  <div><span className="opacity-70">Password:</span> demo123</div>
+                  <div>
+                    <span className="opacity-70">Email:</span> demo@arkwork.com
+                  </div>
+                  <div>
+                    <span className="opacity-70">Password:</span> demo123
+                  </div>
                 </div>
               </div>
               <button
@@ -83,12 +100,14 @@ export default function SignIn() {
             </div>
           </div>
 
+          {/* Error */}
           {error && (
             <div className="mx-6 mt-4 rounded-2xl border border-rose-300 bg-rose-50 px-4 py-3 text-sm text-rose-700">
               {error}
             </div>
           )}
 
+          {/* Form */}
           <form onSubmit={handleSubmit} className="px-6 pb-6 pt-4">
             <div className="space-y-4">
               <label className="block">
@@ -121,6 +140,7 @@ export default function SignIn() {
                     onClick={() => setShowPw((v) => !v)}
                     className="absolute inset-y-0 right-0 grid w-10 place-items-center text-slate-500 hover:text-slate-700"
                     tabIndex={-1}
+                    aria-label="Toggle password visibility"
                   >
                     {showPw ? '🙈' : '👁️'}
                   </button>
@@ -129,7 +149,10 @@ export default function SignIn() {
 
               <div className="flex items-center justify-between">
                 <label className="inline-flex items-center gap-2 text-sm text-slate-700">
-                  <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-blue-600" />
+                  <input
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-slate-300 text-blue-600"
+                  />
                   Remember me
                 </label>
                 <a className="text-sm font-medium text-blue-700 hover:underline" href="#">
