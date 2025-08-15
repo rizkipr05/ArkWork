@@ -1,0 +1,113 @@
+{ 
+ "halaman-home": {},
+
+  "nav": {
+    "home": "Beranda",
+    "jobs": "Lowongan",
+    "tenders": "Tender",
+    "news": "Berita",
+    "about": "Tentang"
+  },
+  "auth": {
+    "signIn": "Masuk",
+    "signUp": "Daftar"
+  },
+  "user": {
+    "profile": "Profil",
+    "dashboard": "Dasbor",
+    "logout": "Keluar",
+    "fallback": "Pengguna"
+  },
+  "cta": {
+    "energy": "Jelajahi Update Energi"
+  },
+  "home": {
+    "hero": {
+      "title": { "1": "Majukan Kariermu di", "2": "Sektor Energi" },
+      "desc": "ArkWork menghubungkan profesional energi dengan peluang di oil & gas, LNG, utilitas, dan teknologi energi terbaru. Telusuri lowongan, dapatkan insight industri, dan temukan perusahaan—semua di satu tempat.",
+      "cta": { "jobs": "Jelajahi Lowongan", "companies": "Lihat Perusahaan" }
+    },
+    "explore": {
+      "title": "Jelajahi Tanpa Masuk",
+      "desc": "Telusuri lowongan, temukan perusahaan, dan ikuti kabar industri. Masuk hanya saat siap melamar."
+    },
+    "card": {
+      "jobs": { "title": "Telusuri Lowongan", "desc": "Cari ribuan peluang sektor energi dengan filter lanjutan." },
+      "companies": { "title": "Temukan Perusahaan", "desc": "Kenali perusahaan energi dan budaya kerja serta peluangnya." },
+      "news": { "title": "Berita Industri", "desc": "Tetap up to date dengan berita dan tender sektor energi." }
+    },
+    "features": {
+      "title": "Semua yang Kamu Butuhkan untuk Karier Energi",
+      "desc": "Dari pencarian kerja hingga insight industri, ArkWork menyediakan alat lengkap untuk berkembang di sektor energi."
+    },
+    "feature": {
+      "1": { "title": "Pencarian Kerja Cerdas", "desc": "Temukan lowongan energi dengan pencocokan AI & filter lanjutan." },
+      "2": { "title": "Profil Perusahaan", "desc": "Kenali perusahaan dan budaya kerja serta peluangnya." },
+      "3": { "title": "Pencocokan Talenta", "desc": "Cocokkan ke peran sesuai skill dan pengalamanmu." },
+      "4": { "title": "Berita Industri", "desc": "Ikuti berita & tender terbaru sektor energi." },
+      "5": { "title": "Jejaring Profesional", "desc": "Terhubung dengan profesional dan pemimpin industri." },
+      "6": { "title": "Fokus Energi", "desc": "Liputan mendalam oil & gas, LNG, dan utilitas." }
+    },
+    "final": {
+      "title": "Siap Menguatkan Kariermu?",
+      "desc": "Bergabung dengan ribuan profesional yang mempercayai ArkWork.",
+      "cta": "Ke Dashboard",
+      "note": "Tanpa kartu kredit • Daftar kurang dari 1 menit"
+    }
+  },
+  "lang": { "switch": "Ganti bahasa" },
+  "menu": { "open": "Buka menu", "close": "Tutup menu", "user": "Buka menu pengguna" },
+
+  "footer": {
+    "logoAlt": "Logo ArkWork",
+    "description": "Bangun karier Anda di sektor energi: lowongan kerja, tender, dan wawasan untuk profesional oil & gas, LNG, dan utilitas.",
+    "headings": { "product": "Produk", "company": "Perusahaan", "legal": "Legal" },
+    "links": {
+      "jobs": "Lowongan",
+      "tenders": "Tender",
+      "news": "Berita",
+      "home": "Beranda",
+      "about": "Tentang",
+      "terms": "Ketentuan",
+      "privacy": "Privasi",
+      "cookies": "Cookie"
+    },
+    "social": { "x": "X / Twitter", "linkedin": "LinkedIn", "email": "Email" },
+    "copyright": "© {year} ArkWork. Hak cipta dilindungi.",
+    "madeFor": "Dibuat untuk komunitas energi & oil & gas."
+  },
+
+  "Halaman-about": {},
+  
+  "about": {
+    "title": "Tentang",
+    "intro": "ArkWork adalah platform inovatif yang menghubungkan lowongan kerja, tender, dan kabar industri dengan profesional serta bisnis di sektor energi.",
+    "vision": {
+      "title": "Visi Kami",
+      "desc": "Menjadi jembatan utama antara talenta, perusahaan, dan peluang bisnis—menciptakan ekosistem kolaboratif yang mendorong pertumbuhan ekonomi dan inovasi."
+    },
+    "mission": {
+      "title": "Misi Kami",
+      "points": {
+        "1": "Memberikan akses mudah ke lowongan dan tender terbaru.",
+        "2": "Membantu perusahaan menemukan talenta yang tepat secara efisien.",
+        "3": "Menyajikan berita industri yang tepercaya dan relevan.",
+        "4": "Mendorong kolaborasi antara pelaku industri dan profesional."
+      }
+    },
+    "values": {
+      "title": "Nilai-Nilai Kami",
+      "items": {
+        "integrity": { "title": "Integritas", "desc": "Menjunjung kejujuran dan transparansi dalam setiap aspek kerja." },
+        "innovation": { "title": "Inovasi", "desc": "Terus beradaptasi dan menciptakan solusi kreatif untuk kebutuhan pasar." },
+        "collaboration": { "title": "Kolaborasi", "desc": "Percaya pada kekuatan sinergi antar individu dan organisasi." },
+        "quality": { "title": "Kualitas", "desc": "Berkomitmen memberikan layanan terbaik bagi pengguna." }
+      }
+    },
+    "closing": {
+      "title": "Bergabung dengan ArkWork Hari Ini",
+      "desc": "Apakah kamu profesional yang mencari peluang baru atau perusahaan yang ingin merekrut talenta terbaik, ArkWork adalah tempat yang tepat untuk memulai.",
+      "cta": "Jelajahi Peluang"
+    }
+  }
+}

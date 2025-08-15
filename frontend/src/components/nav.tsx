@@ -5,12 +5,17 @@ import Image from 'next/image'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { usePathname } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 // Static import agar logo selalu ter-bundle
 import ArkLogo from '@/app/Images/Ungu__1_-removebg-preview.png'
 
 export default function Nav() {
   const pathname = usePathname()
+  const t = useTranslations()
+  const locale = useLocale()
+  const router = useRouter()
 
   // Sembunyikan navbar di /admin/*
   if (pathname?.startsWith('/admin')) return null
@@ -18,7 +23,6 @@ export default function Nav() {
   const [open, setOpen] = useState(false)          // mobile drawer
   const [menuOpen, setMenuOpen] = useState(false)  // avatar dropdown
   const { user, logout } = useAuth()
-  const drawerRef = useRef<HTMLDivElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
   // Tutup saat klik di luar / tekan ESC
@@ -49,18 +53,25 @@ export default function Nav() {
 
   const links = useMemo(
     () => [
-      { href: '/', label: 'Home', icon: HomeIcon },
-      { href: '/jobs', label: 'Jobs', icon: BriefcaseIcon },
-      { href: '/tender', label: 'Tenders', icon: FileTextIcon },
-      { href: '/news', label: 'News', icon: NewspaperIcon },
-      { href: '/about', label: 'About', icon: InfoIcon },
+      { href: '/', label: t('nav.home'), icon: HomeIcon },
+      { href: '/jobs', label: t('nav.jobs'), icon: BriefcaseIcon },
+      { href: '/tender', label: t('nav.tenders'), icon: FileTextIcon },
+      { href: '/news', label: t('nav.news'), icon: NewspaperIcon },
+      { href: '/about', label: t('nav.about'), icon: InfoIcon },
     ],
-    []
+    [t]
   )
 
-  const displayName = (user as any)?.displayName || 'User'
+  const displayName = (user as any)?.displayName || t('user.fallback')
   const email = (user as any)?.email
   const photoURL = (user as any)?.photoURL
+
+  // Toggle bahasa via cookie + refresh (tanpa ubah URL)
+  const switchLocale = () => {
+    const next = locale === 'en' ? 'id' : 'en'
+    document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=31536000`
+    router.refresh()
+  }
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/60 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-neutral-800 dark:bg-neutral-950/60">
@@ -89,31 +100,44 @@ export default function Nav() {
           })}
         </div>
 
-        {/* Auth (desktop) */}
+        {/* Right actions (desktop): Lang + Auth */}
         <div className="hidden items-center gap-3 md:flex">
+          {/* Language button */}
+          <button
+            onClick={switchLocale}
+            aria-label={t('lang.switch')}
+            title={t('lang.switch')}
+            className="inline-flex items-center gap-2 rounded-xl border border-neutral-300 px-3 py-2 text-sm text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-900"
+          >
+            <GlobeIcon className="h-4 w-4" />
+            <span className="font-semibold">{locale === 'en' ? 'ID' : 'EN'}</span>
+          </button>
+
+          {/* Auth (desktop) */}
           {!user ? (
             <>
               <Link
                 href="/auth/signin"
                 className="inline-flex items-center rounded-xl border border-blue-600 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50"
               >
-                Sign In
+                {t('auth.signIn')}
               </Link>
               <Link
                 href="/auth/signup"
                 className="inline-flex items-center rounded-xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600"
               >
-                Sign Up
+                {t('auth.signUp')}
               </Link>
             </>
           ) : (
             <div className="relative" ref={menuRef}>
-              {/* Tombol avatar (luar): avatar + NAMA (tanpa email) + chevron */}
+              {/* Tombol avatar (luar): avatar + NAMA + chevron */}
               <button
                 id="avatarBtn"
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-haspopup="menu"
                 aria-expanded={menuOpen}
+                aria-label={t('menu.user')}
                 className="flex items-center gap-2 rounded-2xl border border-neutral-200 px-2 py-1.5 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
               >
                 <Avatar src={photoURL} alt={displayName} size={32} />
@@ -154,11 +178,11 @@ export default function Nav() {
                 <div className="py-1">
                   <MenuItem href="/profile" onClick={() => setMenuOpen(false)}>
                     <UserIcon className="h-4 w-4" />
-                    <span>Profile</span>
+                    <span>{t('user.profile')}</span>
                   </MenuItem>
                   <MenuItem href="/dashboard" onClick={() => setMenuOpen(false)}>
                     <GridIcon className="h-4 w-4" />
-                    <span>Dashboard</span>
+                    <span>{t('user.dashboard')}</span>
                   </MenuItem>
                   <hr className="my-1 border-neutral-200 dark:border-neutral-800" />
                   <button
@@ -170,7 +194,7 @@ export default function Nav() {
                     className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-neutral-900"
                   >
                     <LogoutIcon className="h-4 w-4" />
-                    <span>Logout</span>
+                    <span>{t('user.logout')}</span>
                   </button>
                 </div>
               </div>
@@ -182,7 +206,7 @@ export default function Nav() {
         <button
           id="mobileBtn"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
+          aria-label={open ? t('menu.close') : t('menu.open')}
           className="grid h-10 w-10 place-items-center rounded-xl border border-neutral-200 text-neutral-700 hover:bg-neutral-50 active:translate-y-[1px] md:hidden dark:border-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-900"
         >
           <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
@@ -203,7 +227,6 @@ export default function Nav() {
       {/* Mobile Drawer */}
       <aside
         id="mobileMenu"
-        ref={drawerRef}
         className={`fixed inset-y-0 right-0 z-[60] w-[86%] max-w-sm transform transition-transform duration-250 ease-out md:hidden
           ${open ? 'translate-x-0' : 'translate-x-full'}`}
         aria-hidden={!open}
@@ -226,7 +249,7 @@ export default function Nav() {
             </div>
             <button
               onClick={() => setOpen(false)}
-              aria-label="Close menu"
+              aria-label={t('menu.close')}
               className="grid h-9 w-9 place-items-center rounded-xl border border-neutral-200 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5">
@@ -273,14 +296,14 @@ export default function Nav() {
                     onClick={() => setOpen(false)}
                     className="rounded-xl border border-blue-600 px-3 py-2 text-center text-sm font-medium text-blue-700 hover:bg-blue-50"
                   >
-                    Sign In
+                    {t('auth.signIn')}
                   </Link>
                   <Link
                     href="/auth/signup"
                     onClick={() => setOpen(false)}
                     className="rounded-xl bg-amber-500 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-amber-600"
                   >
-                    Sign Up
+                    {t('auth.signUp')}
                   </Link>
                 </div>
               ) : (
@@ -304,14 +327,14 @@ export default function Nav() {
                     onClick={() => setOpen(false)}
                     className="block rounded-xl px-3 py-2 text-center text-sm text-neutral-700 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-900"
                   >
-                    Profile
+                    {t('user.profile')}
                   </Link>
                   <Link
                     href="/dashboard"
                     onClick={() => setOpen(false)}
                     className="block rounded-xl px-3 py-2 text-center text-sm text-neutral-700 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-900"
                   >
-                    Dashboard
+                    {t('user.dashboard')}
                   </Link>
                   <button
                     onClick={() => {
@@ -320,22 +343,35 @@ export default function Nav() {
                     }}
                     className="block w-full rounded-xl border border-red-600 px-3 py-2 text-center text-sm font-medium text-red-600 hover:bg-red-600 hover:text-white"
                   >
-                    Logout
+                    {t('user.logout')}
                   </button>
                 </div>
               )}
             </nav>
 
             {/* Sticky CTA bottom (safe-area aware) */}
-            <div className="border-t border-neutral-200 bg-white px-3 py-3 dark:border-neutral-800 dark:bg-neutral-950 [padding-bottom:calc(env(safe-area-inset-bottom)+12px)]">
+            <div className="border-t border-neutral-200 bg-white px-3 py-3 dark:border-neutral-800 dark:bg-neutral-950 [padding-bottom:calc(env(safe-area-inset-bottom)+12px)] space-y-2">
               <Link
                 href="/news"
                 onClick={() => setOpen(false)}
                 className="flex w-full items-center justify-center gap-2 rounded-xl bg-neutral-900 px-4 py-3 text-sm font-semibold text-white hover:opacity-90 active:translate-y-[1px] dark:bg-white dark:text-neutral-900"
               >
                 <LightningIcon className="h-4 w-4" />
-                Explore Energy Updates
+                {t('cta.energy')}
               </Link>
+
+              {/* Language button (mobile) */}
+              <button
+                onClick={() => {
+                  switchLocale()
+                  setOpen(false)
+                }}
+                aria-label={t('lang.switch')}
+                className="flex w-full items-center justify-center gap-2 rounded-xl border border-neutral-300 px-4 py-3 text-sm font-semibold text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-900"
+              >
+                <GlobeIcon className="h-4 w-4" />
+                <span>{locale === 'en' ? 'Bahasa Indonesia' : 'English'}</span>
+              </button>
             </div>
           </div>
         </div>
@@ -488,6 +524,14 @@ function LogoutIcon(props: React.SVGProps<SVGSVGElement>) {
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path d="M15 17l5-5-5-5M20 12H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       <path d="M4 21h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  )
+}
+function GlobeIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" {...props}>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
+      <path d="M3 12h18M12 3a12 12 0 0 0 0 18M12 3a12 12 0 0 1 0 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   )
 }

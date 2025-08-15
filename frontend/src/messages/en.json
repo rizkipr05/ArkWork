@@ -1,0 +1,122 @@
+{
+
+  "Halaman-home": {}, 
+
+
+
+  "nav": {
+    "home": "Home",
+    "jobs": "Jobs",
+    "tenders": "Tenders",
+    "news": "News",
+    "about": "About"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "user": {
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "logout": "Logout",
+    "fallback": "User"
+  },
+  "cta": {
+    "energy": "Explore Energy Updates"
+  },
+  "home": {
+    "hero": {
+      "title": { "1": "Power Your Career in the", "2": "Energy Sector" },
+      "desc": "ArkWork connects energy professionals with opportunities across oil & gas, LNG, utilities, and emerging energy technologies. Browse jobs, get industry insights, and discover companies—all in one place.",
+      "cta": { "jobs": "Explore Jobs", "companies": "Browse Companies" }
+    },
+    "explore": {
+      "title": "Explore Without Signing In",
+      "desc": "Browse jobs, discover companies, and stay updated with industry news. Sign in only when you're ready to apply."
+    },
+    "card": {
+      "jobs": { "title": "Browse Jobs", "desc": "Search thousands of sector opportunities with advanced filters." },
+      "companies": { "title": "Discover Companies", "desc": "Explore energy companies and learn about their culture and opportunities." },
+      "news": { "title": "Industry News", "desc": "Stay updated with the latest energy sector news and tender opportunities." }
+    },
+    "features": {
+      "title": "Everything You Need for Energy Careers",
+      "desc": "From job search to industry insights, ArkWork gives you complete tools to grow in the energy sector."
+    },
+    "feature": {
+        
+      "1": { "title": "Smart Job Search", "desc": "Find energy jobs with AI matching and advanced filters." },
+      "2": { "title": "Company Profiles", "desc": "Explore companies and learn about their culture & opportunities." },
+      "3": { "title": "Talent Matching", "desc": "Get matched to roles based on your skills and experience." },
+      "4": { "title": "Industry News", "desc": "Follow the latest energy news and tenders." },
+      "5": { "title": "Professional Network", "desc": "Connect with energy professionals and leaders." },
+      "6": { "title": "Energy Focus", "desc": "Deep coverage of oil & gas, LNG, and utilities." }
+    },
+    "final": {
+      "title": "Ready to Energize Your Career?",
+      "desc": "Join thousands who trust ArkWork for jobs, insights, and community.",
+      "cta": "Go to Dashboard",
+      "note": "No credit card required • Sign up takes less than 1 minute"
+    }
+  },
+  "lang": { "switch": "Switch language" },
+  "menu": { "open": "Open menu", "close": "Close menu", "user": "Open user menu" },
+
+  "footer": {
+    "logoAlt": "ArkWork Logo",
+    "description": "Build your career in the energy sector: jobs, tenders, and insights for oil & gas, LNG, and utilities professionals.",
+    "headings": { "product": "Product", "company": "Company", "legal": "Legal" },
+    "links": {
+      "jobs": "Jobs",
+      "tenders": "Tenders",
+      "news": "News",
+      "home": "Home",
+      "about": "About",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "cookies": "Cookies"
+    },
+    "social": { "x": "X / Twitter", "linkedin": "LinkedIn", "email": "Email" },
+    "copyright": "© {year} ArkWork. All rights reserved.",
+    "madeFor": "Made for the energy & oil & gas community."
+  },
+
+  
+    "Halaman-about": {},
+
+  "about": {
+    "title": "About",
+    "intro": "ArkWork is an innovative platform that connects job opportunities, tenders, and industry news with professionals and businesses across the energy sector.",
+    "vision": {
+      "title": "Our Vision",
+      "desc": "To become the leading bridge between talented professionals, companies, and business opportunities—creating a collaborative ecosystem that drives economic growth and innovation."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "points": {
+        "1": "Provide easy access to the latest job openings and tenders.",
+        "2": "Help companies find the right talents efficiently.",
+        "3": "Deliver reliable and relevant industry news.",
+        "4": "Foster collaboration between industry players and professionals."
+      }
+    },
+    "values": {
+      "title": "Our Core Values",
+      "items": {
+        "integrity": { "title": "Integrity", "desc": "We uphold honesty and transparency in all aspects of our work." },
+        "innovation": { "title": "Innovation", "desc": "We continuously adapt and create creative solutions for market needs." },
+        "collaboration": { "title": "Collaboration", "desc": "We believe in the power of synergy between individuals and organizations." },
+        "quality": { "title": "Quality", "desc": "We are committed to delivering the best services to our users." }
+      }
+    },
+    "closing": {
+      "title": "Join ArkWork Today",
+      "desc": "Whether you are a professional seeking new opportunities or a company looking to hire top talent, ArkWork is the right place to start.",
+      "cta": "Explore Opportunities"
+    }
+  }
+
+
+  
+
+}
