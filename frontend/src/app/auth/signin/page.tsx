@@ -49,10 +49,6 @@ export default function SignIn() {
     }
   }
 
-  function useDemo() {
-    setEmail('demo@arkwork.com');
-    setPassword('demo123');
-  }
 
   return (
     <div className="min-h-[100svh] bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center px-4 py-10">
