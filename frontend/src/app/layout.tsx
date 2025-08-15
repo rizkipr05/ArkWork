@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       {
         url: '/logo',
         width: 2000,
-        height: 2000,
+        height: 200,
         alt: 'ArkWork Logo'
       }
     ]
