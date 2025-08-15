@@ -11,8 +11,26 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
   title: 'ArkWork - Build Your Career in Energy & Oil & Gas',
-  description: 'Find the latest jobs, tenders, and trainings only on ArkWork'
+  description: 'Find the latest jobs, tenders, and trainings only on ArkWork',
+  icons: {
+    icon: '/logo',
+    shortcut: '/logo',
+    apple: '/logo'
+  },
+  openGraph: {
+    title: 'ArkWork - Build Your Career in Energy & Oil & Gas',
+    description: 'Find the latest jobs, tenders, and trainings only on ArkWork',
+    images: [
+      {
+        url: '/logo',
+        width: 2000,
+        height: 2000,
+        alt: 'ArkWork Logo'
+      }
+    ]
+  }
 }
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
