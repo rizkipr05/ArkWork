@@ -11,24 +11,24 @@ import ArkLogo from '@/app/Images/Ungu__1_-removebg-preview.png'
 
 export default function Nav() {
   const pathname = usePathname()
-  const [open, setOpen] = useState(false)          // mobile drawer
-  const [menuOpen, setMenuOpen] = useState(false)  // avatar dropdown
+
+  // ⬇️ Sembunyikan navbar saat berada di /admin (termasuk semua sub-route)
+  if (pathname?.startsWith('/admin')) {
+    return null
+  }
+
+  const [open, setOpen] = useState(false)
   const { user, logout } = useAuth()
   const drawerRef = useRef<HTMLDivElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
 
   // Tutup saat klik di luar / tekan ESC
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (!(e.target instanceof HTMLElement)) return
       if (!e.target.closest('#mobileMenu') && !e.target.closest('#mobileBtn')) setOpen(false)
-      if (!e.target.closest('#avatarMenu') && !e.target.closest('#avatarBtn')) setMenuOpen(false)
     }
     const onEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setOpen(false)
-        setMenuOpen(false)
-      }
+      if (e.key === 'Escape') setOpen(false)
     }
     document.addEventListener('click', onDoc)
     document.addEventListener('keydown', onEsc)
@@ -37,12 +37,6 @@ export default function Nav() {
       document.removeEventListener('keydown', onEsc)
     }
   }, [])
-
-  // Tutup semua menu saat route berubah
-  useEffect(() => {
-    setOpen(false)
-    setMenuOpen(false)
-  }, [pathname])
 
   // Prevent body scroll saat drawer open
   useEffect(() => {
@@ -59,10 +53,6 @@ export default function Nav() {
     ],
     []
   )
-
-  const displayName = (user as any)?.displayName || 'User'
-  const email = (user as any)?.email
-  const photoURL = (user as any)?.photoURL
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 border-b border-neutral-200/60 bg-white/70 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-neutral-800 dark:bg-neutral-950/60">
@@ -109,74 +99,20 @@ export default function Nav() {
               </Link>
             </>
           ) : (
-            <div className="relative" ref={menuRef}>
-              {/* Tombol avatar (luar): avatar + NAMA (tanpa email) + chevron */}
+            <>
+              <Link
+                href="/dashboard"
+                className="text-sm text-neutral-700 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
+              >
+                Dashboard
+              </Link>
               <button
-                id="avatarBtn"
-                onClick={() => setMenuOpen((v) => !v)}
-                aria-haspopup="menu"
-                aria-expanded={menuOpen}
-                className="flex items-center gap-2 rounded-2xl border border-neutral-200 px-2 py-1.5 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
+                onClick={logout}
+                className="inline-flex items-center rounded-xl border border-red-600 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-600 hover:text-white"
               >
-                <Avatar src={photoURL} alt={displayName} size={32} />
-                <span className="hidden sm:block max-w-[160px] truncate text-sm font-semibold text-neutral-800 dark:text-neutral-100">
-                  {displayName}
-                </span>
-                <ChevronDownIcon className={`h-4 w-4 text-neutral-500 transition ${menuOpen ? 'rotate-180' : ''}`} />
+                Logout
               </button>
-
-              {/* Dropdown */}
-              <div
-                id="avatarMenu"
-                role="menu"
-                aria-hidden={!menuOpen}
-                className={[
-                  'absolute right-0 mt-2 w-56 overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-xl dark:border-neutral-800 dark:bg-neutral-950',
-                  menuOpen ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 -translate-y-1',
-                  'transition-all duration-150'
-                ].join(' ')}
-              >
-                {/* Header di dalam: avatar + nama + email */}
-                <div className="px-3 py-3 border-b border-neutral-200 dark:border-neutral-800">
-                  <div className="flex items-center gap-3">
-                    <Avatar src={photoURL} alt={displayName} size={40} />
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
-                        {displayName}
-                      </p>
-                      {!!email && (
-                        <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
-                          {email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="py-1">
-                  <MenuItem href="/profile" onClick={() => setMenuOpen(false)}>
-                    <UserIcon className="h-4 w-4" />
-                    <span>Profile</span>
-                  </MenuItem>
-                  <MenuItem href="/dashboard" onClick={() => setMenuOpen(false)}>
-                    <GridIcon className="h-4 w-4" />
-                    <span>Dashboard</span>
-                  </MenuItem>
-                  <hr className="my-1 border-neutral-200 dark:border-neutral-800" />
-                  <button
-                    role="menuitem"
-                    onClick={() => {
-                      setMenuOpen(false)
-                      logout()
-                    }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-neutral-900"
-                  >
-                    <LogoutIcon className="h-4 w-4" />
-                    <span>Logout</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            </>
           )}
         </div>
 
@@ -267,7 +203,7 @@ export default function Nav() {
               {/* Divider */}
               <hr className="my-4 border-neutral-200 dark:border-neutral-800" />
 
-              {/* Account area (mobile) */}
+              {/* Account area */}
               {!user ? (
                 <div className="grid grid-cols-2 gap-2">
                   <Link
@@ -287,26 +223,6 @@ export default function Nav() {
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <div className="flex items-center gap-3 rounded-xl border border-neutral-200 p-3 dark:border-neutral-800">
-                    <Avatar src={photoURL} alt={displayName} size={40} />
-                    <div className="min-w-0">
-                      <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
-                        {displayName}
-                      </p>
-                      {!!email && (
-                        <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate">
-                          {email}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <Link
-                    href="/profile"
-                    onClick={() => setOpen(false)}
-                    className="block rounded-xl px-3 py-2 text-center text-sm text-neutral-700 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-900"
-                  >
-                    Profile
-                  </Link>
                   <Link
                     href="/dashboard"
                     onClick={() => setOpen(false)}
@@ -327,7 +243,7 @@ export default function Nav() {
               )}
             </nav>
 
-            {/* Sticky CTA bottom */}
+            {/* Sticky CTA bottom (safe-area aware) */}
             <div className="border-t border-neutral-200 bg-white px-3 py-3 dark:border-neutral-800 dark:bg-neutral-950 [padding-bottom:calc(env(safe-area-inset-bottom)+12px)]">
               <Link
                 href="/news"
@@ -364,52 +280,6 @@ function NavLink({
           ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900'
           : 'text-neutral-700 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-900',
       ].join(' ')}
-    >
-      {children}
-    </Link>
-  )
-}
-
-/* --------- Avatar + MenuItem helper --------- */
-function Avatar({ src, alt, size = 32 }: { src?: string; alt: string; size?: number }) {
-  if (src) {
-    return (
-      <Image
-        src={src}
-        alt={alt}
-        width={size}
-        height={size}
-        className="h-8 w-8 rounded-full object-cover ring-1 ring-neutral-200 dark:ring-neutral-800"
-      />
-    )
-  }
-  const initial = (alt || 'U').trim().charAt(0).toUpperCase()
-  return (
-    <div
-      aria-hidden
-      style={{ width: size, height: size }}
-      className="grid place-items-center rounded-full bg-neutral-200 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
-    >
-      <span className="text-sm font-semibold">{initial}</span>
-    </div>
-  )
-}
-
-function MenuItem({
-  href,
-  onClick,
-  children,
-}: {
-  href: string
-  onClick?: () => void
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      role="menuitem"
-      href={href}
-      onClick={onClick}
-      className="flex items-center gap-2 px-4 py-2 text-sm text-neutral-700 hover:bg-neutral-50 dark:text-neutral-300 dark:hover:bg-neutral-900"
     >
       {children}
     </Link>
@@ -460,35 +330,6 @@ function LightningIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path d="M13 2 3 14h7l-1 8 12-14h-7l1-6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
-    </svg>
-  )
-}
-function ChevronDownIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-function UserIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-5 0-9 3-9 6v1h18v-1c0-3-4-6-9-6Z" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  )
-}
-function GridIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M3 3h8v8H3V3Zm10 0h8v8h-8V3ZM3 13h8v8H3v-8Zm10 0h8v8h-8v-8Z" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  )
-}
-function LogoutIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" {...props}>
-      <path d="M15 17l5-5-5-5M20 12H9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M4 21h6a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4" stroke="currentColor" strokeWidth="2" />
     </svg>
   )
 }
