@@ -13,11 +13,8 @@ type MaybeFn<T extends (...args: any[]) => any> = T | undefined;
 
 interface SignupCompanyPayload {
   companyName: string;
-  contactName: string;
   email: string;
   password: string;
-  phone?: string;
-  size?: string;
   website?: string;
 }
 
@@ -31,17 +28,13 @@ export default function Page() {
   const t = useTranslations('companySignup');
   const router = useRouter();
 
-  // pastikan hook diketik dengan benar agar TS tidak error
   const { signup, social, signupCompany } = useAuth() as Auth;
 
   // form state
   const [company, setCompany] = useState('');
-  const [contact, setContact] = useState('');
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [confirm, setConfirm] = useState('');
-  const [phone, setPhone] = useState('');
-  const [size, setSize] = useState('');
   const [website, setWebsite] = useState('');
 
   const [showPw, setShowPw] = useState(false);
@@ -49,10 +42,8 @@ export default function Page() {
   const [agree, setAgree] = useState(true);
 
   const [busy, setBusy] = useState(false);
-  const [googleBusy, setGoogleBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // password strength (opsional, untuk indikator visual)
   const strong =
     pw.length >= 8 && /[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw);
 
@@ -66,7 +57,6 @@ export default function Page() {
     e.preventDefault();
     if (busy) return;
 
-    // validasi dasar
     if (!agree) {
       setError(t('error.agree'));
       return;
@@ -79,10 +69,6 @@ export default function Page() {
       setError(t('error.company'));
       return;
     }
-    if (contact.trim().length < 2) {
-      setError(t('error.contact'));
-      return;
-    }
 
     try {
       setBusy(true);
@@ -90,44 +76,24 @@ export default function Page() {
 
       const payload: SignupCompanyPayload = {
         companyName: company.trim(),
-        contactName: contact.trim(),
         email: email.trim(),
         password: pw,
-        phone: phone.trim() || undefined,
-        size: size || undefined,
         website: normalizeUrl(website),
       };
 
       if (typeof signupCompany === 'function') {
         await signupCompany(payload);
       } else {
-        // fallback jika tidak ada endpoint khusus perusahaan
         await signup(payload.companyName, payload.email, payload.password);
       }
 
-      router.push('/company/dashboard'); // sesuaikan dengan rute dashboard kamu
+      router.push('/company/dashboard');
     } catch (err: unknown) {
       const message =
         (err as { message?: string })?.message ?? t('error.default');
       setError(message);
     } finally {
       setBusy(false);
-    }
-  }
-
-  async function onGoogle() {
-    if (googleBusy) return;
-    try {
-      setGoogleBusy(true);
-      setError(null);
-      await social('google', 'signup');
-      router.push('/company/dashboard');
-    } catch (err: unknown) {
-      const message =
-        (err as { message?: string })?.message ?? t('error.google');
-      setError(message);
-    } finally {
-      setGoogleBusy(false);
     }
   }
 
@@ -139,7 +105,7 @@ export default function Page() {
           <div className="px-6 pt-6 text-center">
             <Image
               src={Logo}
-              alt="ArkWork Logo"
+              alt="Company Logo"
               width={100}
               height={100}
               className="mx-auto mb-6 h-20 w-20 object-contain"
@@ -180,21 +146,6 @@ export default function Page() {
                 />
               </label>
 
-              {/* Contact Person */}
-              <label className="block">
-                <span className="mb-1 block text-xs text-slate-600">
-                  {t('form.contact')}
-                </span>
-                <input
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                  required
-                  placeholder={t('placeholder.contact')}
-                  className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
-                  autoComplete="name"
-                />
-              </label>
-
               {/* Email */}
               <label className="block">
                 <span className="mb-1 block text-xs text-slate-600">
@@ -211,42 +162,6 @@ export default function Page() {
                   inputMode="email"
                 />
               </label>
-
-              {/* Phone + Size */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <label className="block">
-                  <span className="mb-1 block text-xs text-slate-600">
-                    {t('form.phone')}
-                  </span>
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder={t('placeholder.phone')}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
-                    autoComplete="tel"
-                    inputMode="tel"
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-1 block text-xs text-slate-600">
-                    {t('form.size')}
-                  </span>
-                  <select
-                    value={size}
-                    onChange={(e) => setSize(e.target.value)}
-                    className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm"
-                  >
-                    <option value="">{t('placeholder.size')}</option>
-                    <option value="1-10">1–10</option>
-                    <option value="11-50">11–50</option>
-                    <option value="51-200">51–200</option>
-                    <option value="201-500">201–500</option>
-                    <option value="500+">500+</option>
-                  </select>
-                </label>
-              </div>
 
               {/* Website */}
               <label className="block">
@@ -289,7 +204,6 @@ export default function Page() {
                     {showPw ? '🙈' : '👁️'}
                   </button>
                 </div>
-                {/* indikator kekuatan password */}
                 <div className="mt-1 flex items-center gap-2" aria-hidden="true">
                   <div
                     className={`h-1 w-1/3 rounded ${
@@ -355,15 +269,17 @@ export default function Page() {
                   onChange={(e) => setAgree(e.target.checked)}
                   className="h-4 w-4 rounded border-slate-300 text-blue-600"
                 />
-                {t('agree.1')}{' '}
-                <a href="#" className="text-blue-700 hover:underline">
-                  {t('agree.terms')}
-                </a>{' '}
-                {t('agree.and')}{' '}
-                <a href="#" className="text-blue-700 hover:underline">
-                  {t('agree.privacy')}
-                </a>
-                .
+                <span>
+                  I agree to the{' '}
+                  <Link href="/terms" className="text-blue-700 hover:underline">
+                    Terms of Service
+                  </Link>{' '}
+                  and{' '}
+                  <Link href="/privacy" className="text-blue-700 hover:underline">
+                    Privacy Policy
+                  </Link>
+                  .
+                </span>
               </label>
 
               {/* Submit */}
@@ -382,43 +298,6 @@ export default function Page() {
                 )}
               </button>
             </div>
-
-            {/* Divider */}
-            <div className="my-6 flex items-center">
-              <div className="h-[1px] flex-1 bg-slate-200" />
-              <span className="px-3 text-xs uppercase tracking-wider text-slate-400">
-                {t('or')}
-              </span>
-              <div className="h-[1px] flex-1 bg-slate-200" />
-            </div>
-
-            {/* Google (aktifkan bila siap) */}
-            {/*
-            <button
-              type="button"
-              onClick={onGoogle}
-              disabled={googleBusy}
-              className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-medium shadow hover:bg-slate-50 disabled:opacity-60"
-            >
-              {googleBusy ? (
-                <>
-                  <i className="fa-solid fa-spinner fa-spin mr-2" />
-                  {t('creating')}
-                </>
-              ) : (
-                <>
-                  <Image
-                    src="/google-icon.svg"
-                    alt="Google"
-                    width={18}
-                    height={18}
-                    className="mr-2"
-                  />
-                  {t('google')}
-                </>
-              )}
-            </button>
-            */}
 
             <p className="mt-6 text-center text-sm text-slate-600">
               {t('haveAccount')}{' '}
