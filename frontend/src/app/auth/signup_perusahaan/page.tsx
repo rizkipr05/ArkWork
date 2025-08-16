@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -11,24 +11,28 @@ import Logo from '@/app/Images/Ungu__1_-removebg-preview.png';
 
 type MaybeFn<T extends (...args: any[]) => any> = T | undefined;
 
-export default function CompanySignUp() {
+interface SignupCompanyPayload {
+  companyName: string;
+  contactName: string;
+  email: string;
+  password: string;
+  phone?: string;
+  size?: string;
+  website?: string;
+}
+
+interface Auth {
+  signup: (name: string, email: string, password: string) => Promise<void>;
+  social: (provider: 'google', intent?: 'signup' | 'signin') => Promise<void>;
+  signupCompany?: MaybeFn<(payload: SignupCompanyPayload) => Promise<void>>;
+}
+
+export default function Page() {
   const t = useTranslations('companySignup');
   const router = useRouter();
-  const { signup, social, signupCompany } = useAuth() as {
-    signup: (name: string, email: string, password: string) => Promise<void>;
-    social: (provider: 'google', intent?: 'signup' | 'signin') => Promise<void>;
-    signupCompany?: MaybeFn<
-      (payload: {
-        companyName: string;
-        contactName: string;
-        email: string;
-        password: string;
-        phone?: string;
-        size?: string;
-        website?: string;
-      }) => Promise<void>
-    >;
-  };
+
+  // pastikan hook diketik dengan benar agar TS tidak error
+  const { signup, social, signupCompany } = useAuth() as Auth;
 
   // form state
   const [company, setCompany] = useState('');
@@ -48,7 +52,7 @@ export default function CompanySignUp() {
   const [googleBusy, setGoogleBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // password strength
+  // password strength (opsional, untuk indikator visual)
   const strong =
     pw.length >= 8 && /[A-Z]/.test(pw) && /[a-z]/.test(pw) && /[0-9]/.test(pw);
 
@@ -58,11 +62,11 @@ export default function CompanySignUp() {
     return /^https?:\/\//i.test(v) ? v : `https://${v}`;
   }
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (busy) return;
 
-    // basic validation
+    // validasi dasar
     if (!agree) {
       setError(t('error.agree'));
       return;
@@ -84,7 +88,7 @@ export default function CompanySignUp() {
       setBusy(true);
       setError(null);
 
-      const payload = {
+      const payload: SignupCompanyPayload = {
         companyName: company.trim(),
         contactName: contact.trim(),
         email: email.trim(),
@@ -97,11 +101,11 @@ export default function CompanySignUp() {
       if (typeof signupCompany === 'function') {
         await signupCompany(payload);
       } else {
-        // fallback ke signup biasa bila tidak ada endpoint khusus perusahaan
+        // fallback jika tidak ada endpoint khusus perusahaan
         await signup(payload.companyName, payload.email, payload.password);
       }
 
-      router.push('/company/dashboard'); // ganti jika dashboardmu berbeda
+      router.push('/company/dashboard'); // sesuaikan dengan rute dashboard kamu
     } catch (err: unknown) {
       const message =
         (err as { message?: string })?.message ?? t('error.default');
@@ -250,7 +254,6 @@ export default function CompanySignUp() {
                   {t('form.website')}
                 </span>
                 <input
-                  type="url"
                   value={website}
                   onChange={(e) => setWebsite(e.target.value)}
                   placeholder={t('placeholder.website')}
@@ -286,6 +289,7 @@ export default function CompanySignUp() {
                     {showPw ? '🙈' : '👁️'}
                   </button>
                 </div>
+                {/* indikator kekuatan password */}
                 <div className="mt-1 flex items-center gap-2" aria-hidden="true">
                   <div
                     className={`h-1 w-1/3 rounded ${
@@ -389,7 +393,7 @@ export default function CompanySignUp() {
             </div>
 
             {/* Google (aktifkan bila siap) */}
-            {/* 
+            {/*
             <button
               type="button"
               onClick={onGoogle}
