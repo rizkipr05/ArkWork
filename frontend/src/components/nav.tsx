@@ -135,7 +135,7 @@ export default function Nav() {
               <button
                 id="avatarBtn"
                 onClick={() => setMenuOpen((v) => !v)}
-                aria-haspopup="menu"
+                aria-haspopup="menu"           
                 aria-expanded={menuOpen}
                 aria-label={t('menu.user')}
                 className="flex items-center gap-2 rounded-2xl border border-neutral-200 px-2 py-1.5 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-900"
