@@ -1,5 +1,57 @@
 {
 
+  "signupperushaan":{},
+  "companySignup": {
+    "title": "Create Company Account",
+    "subtitle": "Manage your job posts and hire top talent on ArkWork.",
+    "form": {
+      "company": "Company Name",
+      "contact": "Contact Person",
+      "email": "Company Email",
+      "phone": "Phone Number (optional)",
+      "size": "Team Size (optional)",
+      "website": "Website (optional)",
+      "password": "Password",
+      "confirm": "Confirm Password",
+      "togglePw": "Show/hide password",
+      "toggleConfirm": "Show/hide confirmation"
+    },
+    "placeholder": {
+      "company": "e.g. ArkWork Indonesia, Inc.",
+      "contact": "e.g. Rani Pratama",
+      "email": "hr@company.com",
+      "phone": "08xxxxxxxxxx",
+      "size": "Select team size",
+      "website": "company.com",
+      "password": "At least 8 characters",
+      "confirm": "Repeat your password"
+    },
+    "match": {
+      "ok": "Passwords match",
+      "no": "Passwords do not match"
+    },
+    "agree": {
+      "1": "I agree to the",
+      "terms": "Terms of Service",
+      "and": "and",
+      "privacy": "Privacy Policy"
+    },
+    "creating": "Creating account...",
+    "createBtn": "Create Company Account",
+    "or": "or",
+    "google": "Sign up with Google",
+    "haveAccount": "Already have a company account?",
+    "signIn": "Sign in here",
+    "error": {
+      "default": "Something went wrong. Please try again.",
+      "google": "Google sign-up failed. Please try again.",
+      "agree": "You must agree to the Terms of Service.",
+      "mismatch": "Password confirmation does not match.",
+      "company": "Company name is too short.",
+      "contact": "Contact person name is too short."
+    }
+  },
+
   "Halaman-home": {}, 
 
 
@@ -13,7 +65,7 @@
   },
   "auth": {
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "signUp": "For Companies"
   },
   "user": {
     "profile": "Profile",

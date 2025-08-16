@@ -1,4 +1,58 @@
-{ 
+{     
+
+  "signupperushaan":{},
+  "companySignup": {
+    "title": "Buat Akun Perusahaan",
+    "subtitle": "Kelola lowongan dan rekrut talenta terbaik di ArkWork.",
+    "form": {
+      "company": "Nama Perusahaan",
+      "contact": "Nama PIC",
+      "email": "Email Perusahaan",
+      "phone": "Nomor Telepon (opsional)",
+      "size": "Ukuran Tim (opsional)",
+      "website": "Website (opsional)",
+      "password": "Kata Sandi",
+      "confirm": "Konfirmasi Kata Sandi",
+      "togglePw": "Tampilkan/sembunyikan kata sandi",
+      "toggleConfirm": "Tampilkan/sembunyikan konfirmasi"
+    },
+    "placeholder": {
+      "company": "Mis. PT ArkWork Indonesia",
+      "contact": "Mis. Rani Pratama",
+      "email": "hr@perusahaan.com",
+      "phone": "08xxxxxxxxxx",
+      "size": "Pilih ukuran tim",
+      "website": "perusahaan.com",
+      "password": "Minimal 8 karakter",
+      "confirm": "Ulangi kata sandi"
+    },
+    "match": {
+      "ok": "Kata sandi cocok",
+      "no": "Kata sandi tidak cocok"
+    },
+    "agree": {
+      "1": "Saya menyetujui",
+      "terms": "Syarat & Ketentuan",
+      "and": "dan",
+      "privacy": "Kebijakan Privasi"
+    },
+    "creating": "Membuat akun...",
+    "createBtn": "Buat Akun Perusahaan",
+    "or": "atau",
+    "google": "Daftar dengan Google",
+    "haveAccount": "Sudah punya akun perusahaan?",
+    "signIn": "Masuk di sini",
+    "error": {
+      "default": "Terjadi kesalahan. Coba lagi.",
+      "google": "Gagal menggunakan Google. Coba lagi.",
+      "agree": "Anda harus menyetujui Syarat & Ketentuan.",
+      "mismatch": "Konfirmasi kata sandi tidak sama.",
+      "company": "Nama perusahaan terlalu pendek.",
+      "contact": "Nama PIC terlalu pendek."
+    }
+  },
+
+  
  "halaman-home": {},
 
   "nav": {
@@ -10,7 +64,7 @@
   },
   "auth": {
     "signIn": "Masuk",
-    "signUp": "Daftar"
+    "signUp": "Untuk Peruhaan"
   },
   "user": {
     "profile": "Profil",

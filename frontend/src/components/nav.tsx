@@ -123,7 +123,7 @@ export default function Nav() {
                 {t('auth.signIn')}
               </Link>
               <Link
-                href="/auth/signup"
+                href="/auth/signup_perushaaan"
                 className="inline-flex items-center rounded-xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600"
               >
                 {t('auth.signUp')}
@@ -299,7 +299,7 @@ export default function Nav() {
                     {t('auth.signIn')}
                   </Link>
                   <Link
-                    href="/auth/signup"
+                    href="/auth/signup_perushaan"
                     onClick={() => setOpen(false)}
                     className="rounded-xl bg-amber-500 px-3 py-2 text-center text-sm font-semibold text-white hover:bg-amber-600"
                   >
